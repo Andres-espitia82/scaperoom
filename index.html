@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room Misterioso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="ui-top">
+        <p id="log-text">Despiertas en una habitación extraña... ¿Cómo saldrás de aquí?</p>
+    </div>
+    
+    <button id="nav-left" class="nav-btn">⬅️</button>
+    <button id="nav-right" class="nav-btn">➡️</button>
+
+    <div id="inventory">
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+    </div>
+
+    <div id="room-container">
+        <div id="room">
+            <div class="wall" id="wall-1">
+                <div id="exit-door" class="interactive door">🚪 Puerta Cerrada</div>
+                
+                <div id="frame-round" class="interactive frame-round">
+                    <div class="eyes-container">
+                        <div class="eye"><div class="pupil"></div></div>
+                        <div class="eye"><div class="pupil"></div></div>
+                    </div>
+                </div>
+                <div id="hidden-note" class="interactive hidden-item">📄 Nota Antigua</div>
+                
+                <div id="grandfather-clock" class="interactive clock">🕰️ Reloj de Pie</div>
+            </div>
+
+            <div class="wall" id="wall-2">
+                <div id="frame-center" class="interactive frame-center">🖼️ Cuadro Extraño</div>
+                <div id="vase-clue" class="interactive clue">📜 Nota Arrugada</div>
+                <div id="vase" class="interactive vase">🏺 Jarrón</div>
+                <div id="frozen-key" class="interactive frozen-key">🗝️ Llave Congelada</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dust-container"></div>
+
+    <div id="zoom-overlay" style="display: none;">
+        <div class="zoom-content">
+            <button onclick="closeZoom()" class="close-btn">X</button>
+            <h2 id="zoom-title">Título</h2>
+            <p id="zoom-desc">Descripción...</p>
+            
+            <div id="note-view" style="display: none;">
+                <p id="note-content" class="handwriting"></p>
+            </div>
+            
+            <div id="clock-puzzle" style="display: none;">
+                <div class="clock-face-zoom">
+                    <div id="hour-hand" class="hand hour"></div>
+                    <div id="min-hand" class="hand min"></div>
+                </div>
+                <div class="clock-controls">
+                    <button onclick="rotateHand('hour')">Mover Horas</button>
+                    <button onclick="rotateHand('min')">Mover Minutos</button>
+                </div>
+            </div>
+
+            <div id="riddle-view" style="display: none;">
+                <input type="text" id="riddle-input" placeholder="Escribe la respuesta aquí...">
+                <button onclick="checkRiddle()">Comprobar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

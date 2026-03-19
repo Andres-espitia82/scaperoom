@@ -1,0 +1,140 @@
+:root {
+    --bg-color: #1a1a24;
+    --wall-color: #2a2a35;
+    --text-color: #e0e0e0;
+    --gold: #d4af37;
+    --accent: #5e1b1b;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    user-select: none;
+}
+
+/* UI y Textos */
+#ui-top {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+#log-text {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    display: inline-block;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Botones de navegación */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--gold);
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+    border-radius: 50%;
+}
+.nav-btn:hover { background: var(--gold); color: black; }
+#nav-left { left: 20px; }
+#nav-right { right: 20px; }
+
+/* Habitación y Paredes */
+#room-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+#room {
+    display: flex;
+    width: 200vw; /* 100vw por cada pared */
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.wall {
+    width: 100vw;
+    height: 100%;
+    position: relative;
+    background: var(--wall-color);
+    border-right: 5px solid #111;
+}
+
+/* Elementos Interactivos */
+.interactive {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #333;
+    border: 2px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+.interactive:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+}
+
+/* Posiciones de la Pared 1 */
+.door { bottom: 0; left: 10%; width: 150px; height: 300px; background: #222; }
+.door.shifted-door { transform: translateX(-50px); background: #111; border-color: #0f0; } /* Puerta abierta */
+.clock { bottom: 0; right: 20%; width: 80px; height: 250px; background: #4a3525; }
+.frame-round { top: 30%; left: 40%; width: 100px; height: 100px; border-radius: 50%; background: #222; z-index: 2; }
+.hidden-item { top: 35%; left: 42%; width: 60px; height: 60px; background: #ddd; color: black; z-index: 1; }
+
+/* Posiciones de la Pared 2 */
+.frame-center { top: 20%; left: 45%; width: 120px; height: 150px; z-index: 2; }
+.vase { bottom: 20%; left: 45%; width: 60px; height: 100px; border-radius: 20px 20px 40px 40px; }
+.clue { top: 50%; right: 30%; width: 40px; height: 40px; background: #ccc; color: black; }
+.frozen-key { bottom: 5%; left: 46%; width: 50px; height: 50px; background: transparent; border: none; font-size: 30px; }
+
+/* Animación de los cuadros moviéndose */
+.shifted { transform: translateX(100px) rotate(5deg); opacity: 0.8; }
+
+/* Ojos que siguen el puntero */
+.eyes-container { display: flex; gap: 10px; }
+.eye { width: 20px; height: 20px; background: white; border-radius: 50%; position: relative; overflow: hidden; }
+.pupil { width: 8px; height: 8px; background: black; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Inventario */
+#inventory { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+.slot { width: 50px; height: 50px; background: rgba(255,255,255,0.1); border: 2px solid #555; display: flex; justify-content: center; align-items: center; font-size: 24px; }
+.slot.active { border-color: var(--gold); }
+
+/* Ventana Emergente (Zoom) */
+#zoom-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 20; display: flex; justify-content: center; align-items: center; }
+.zoom-content { background: #222; padding: 30px; border: 2px solid var(--gold); width: 400px; max-width: 90%; text-align: center; position: relative; }
+.close-btn { position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; cursor: pointer; padding: 5px 10px; }
+.handwriting { font-family: 'Brush Script MT', cursive; font-size: 24px; color: #ccc; }
+
+/* Reloj Zoom */
+.clock-face-zoom { width: 150px; height: 150px; border: 4px solid var(--gold); border-radius: 50%; margin: 20px auto; position: relative; background: #eee; }
+.hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; background: black; transform: translateX(-50%); transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44); }
+.hour { width: 6px; height: 40px; }
+.min { width: 4px; height: 60px; background: red; }
+.clock-controls button { margin: 10px; padding: 10px; cursor: pointer; }
+
+/* Input Jarrón */
+#riddle-input { padding: 10px; width: 70%; margin-bottom: 10px; text-transform: uppercase; }
+
+/* Polvo Mágico */
+.dust-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; overflow: hidden; z-index: 5; }
+.dust { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: float linear infinite; box-shadow: 0 0 5px white; }
+@keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 50% { opacity: 0.6; } 100% { transform: translateY(-100px) scale(1.5); opacity: 0; } }
